@@ -8,8 +8,9 @@ function onsignup(){
         email: email_,
         password: password_,
     };
-        if(username!=null ){
-            axios.post('http://localhost:5000',myObj)
+        if(username_!='' && email_!='' && password_!='' ){
+            console.log(myObj);
+            axios.post('http://localhost:5000/insert-user',myObj)
             .then((res)=> console.log(res))
             .catch((err)=> console.log(err));
         }
