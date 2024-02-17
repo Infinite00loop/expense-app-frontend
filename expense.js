@@ -9,10 +9,19 @@ function onsignup(){
         password: password_,
     };
         if(username_!='' && email_!='' && password_!='' ){
-            console.log(myObj);
-            axios.post('http://localhost:5000/insert-user',myObj)
-            .then((res)=> console.log(res))
-            .catch((err)=> console.log(err));
+            axios.get(`http://localhost:5000/get-user/${email_}`)
+            .then((result)=> {
+                if(result.data==""){
+                    axios.post('http://localhost:5000/insert-user',myObj)
+                    .then((res)=> console.log(res))
+                    .catch((err)=> console.log(err));
+                }
+                else{
+                    alert('User already exists')
+                }
+            })
+            .catch((err)=> console.log(err))
+           
         }
        
 }
