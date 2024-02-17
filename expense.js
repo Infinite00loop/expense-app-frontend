@@ -31,23 +31,12 @@ function onlogin(){
    
     let myObj={
         email: email_,
-        password: password_,
+        password: password_
     };
         if(email_!='' && password_!='' ){
-            axios.get(`http://localhost:5000/get-user/${email_}`)
-            .then((result)=> {
-                if(result.data==""){
-                    alert('User does not exist')
-                }
-                else{
-                    var pass= result.data.password
-                    if(password_=== pass){
-                        alert('Logged in successfully')
-                    }
-                    alert('Password  incorrect')
-                }
-            })
-            .catch((err)=> console.log(err))
+            axios.post('http://localhost:5000/login-user',myObj)
+            .then((res)=> alert(res.data))
+            .catch((err)=> alert(err.response.data));
            
         }
        
