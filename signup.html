@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">    
+    <title>Document</title>
+    <style>
+        form{
+            border: groove #020292;
+            
+        }
+        h1{
+            text-align:center ;
+            color: #0f04ac;
+        }
+        label{
+            margin-left: 1%;
+        }
+        .image-container {
+             width: 300px;
+             height: 300px;
+             overflow: hidden;
+        }
+        .buttonStyle {
+             transition-duration: 0.4s;
+        }
+
+        .buttonStyle:hover {
+            background-color: #020292 ; 
+            color: #87c5e9;
+    }        
+        
+    </style>
+</head>
+
+<body>
+    <div>
+        <div class="row" style="margin-top: 10%;">
+            <div class="col-md-2"></div>
+            <div class="col-md-8">
+                <form id= "form" action="#"  >
+                    <h1 >Sign up</h1>
+                    <input type="text" name="username" id="id1" placeholder="UserName"  required style="width: 95%; margin-left: 1%; border-radius: 4px;"/><br><br>
+                    <input type="text"  name="email" id="id2" placeholder="Email" required style="width: 95%;  margin-left: 1%;  border-radius: 4px;"/><br><br>
+                    
+                    <input type="text" name="password" id="id3" placeholder="Password" required style="width: 95%;  margin-left: 1%;  border-radius: 4px;"/><br><br>
+                    <input class="btn btn-primary font-weight-bold buttonStyle" onclick="onsignup()" type="submit" value="Signup" style=" margin-left:1%; width: 97%; ">
+                    <br><br>
+                    <p>Already have an account. <a href="signup.html">Sign in</a></p>
+
+
+                </form>
+            </div>
+        </div>
+        <br><br>
+        
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.19.0/axios.min.js"></script>
+    <script src="expense.js"></script>
+</body>
+</html>
