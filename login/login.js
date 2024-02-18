@@ -8,7 +8,10 @@ function onlogin(){
     };
         if(email_!='' && password_!='' ){
             axios.post('http://localhost:5000/login-user',myObj)
-            .then((res)=> alert(res.data))
+            .then((res)=> {
+                alert(res.data)
+                window.location.href="../ExpenseTracker/expense.html"
+            })
             .catch((err)=> alert(err.response.data));
            
         }
