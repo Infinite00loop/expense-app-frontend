@@ -1,9 +1,10 @@
 var list=document.getElementById('list-items');
 list.addEventListener('click' ,removeElement);
 
+const token = localStorage.getItem('token')
 function getExpense(){
     list.innerHTML=''
-    axios.get('http://localhost:5000/get-expense')
+    axios.get('http://localhost:5000/get-expense', { headers: {"authorization": token}})
     .then(
         (response)=>{
             for(var i=0;i<response.data.length;i++){
@@ -29,7 +30,8 @@ function tracker(){
         description: desc_,
         category: categ_
     };
-    axios.post('http://localhost:5000/insert-expense',myObj)
+
+    axios.post('http://localhost:5000/insert-expense',myObj, { headers: {"authorization": token}})
     .then((res)=>getExpense())
     .catch((err)=>console.log(err));
     
@@ -60,7 +62,7 @@ function removeElement(e){
         if(confirm('Are you sure to delete ?')){
             var li=e.target.parentElement;
            const id=li.getAttribute('item-id')
-           axios .delete(`http://localhost:5000/delete-expense/${id}`)
+           axios .delete(`http://localhost:5000/delete-expense/${id}`,{ headers: {"authorization": token}})
             .then(res=>console.log(res))
             .catch(err=>console.log(err))
             list.removeChild(li);
