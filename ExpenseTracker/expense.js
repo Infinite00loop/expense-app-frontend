@@ -127,7 +127,7 @@ document.getElementById('idk7').onclick= async function(e){
     leaderboard.data.forEach(user => {
         var newList=document.createElement('li');
         newList.className="list-group-item"
-        var text='name- '+user.name+ ' total expense- '+ user.amount;
+        var text='name- '+user.username+ ' total expense- '+ user.amount;
         newList.appendChild(document.createTextNode(text));    
         leaderboardlist.appendChild(newList);
         
