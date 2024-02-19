@@ -1,4 +1,6 @@
 var list=document.getElementById('list-items');
+var leaderboardlist=document.getElementById('list-items2');
+
 list.addEventListener('click' ,removeElement);
 
 const token = localStorage.getItem('token')
@@ -17,7 +19,18 @@ function getExpense(){
     )
 }
 
-window.addEventListener('DOMContentLoaded',getExpense)
+window.addEventListener('DOMContentLoaded',()=>{
+    axios.post('http://localhost:5000/ispremium',{}, { headers: {"authorization": token}})
+    .then((res)=>{
+        if(res.data.isPremium===true){
+            document.getElementById('idk5').style.display= 'none'
+            document.getElementById('idk6').style.display= 'block'
+
+        }
+    })
+    .catch((err)=>console.log(err));
+    getExpense()
+})
 
 function tracker(){
     var expAmount_=document.getElementById('idk1').value;
@@ -95,6 +108,8 @@ document.getElementById('idk5').onclick= async function(e){
 
             alert('You unlocked the premium features')
             document.getElementById('idk5').style.display= 'none'
+            document.getElementById('idk6').style.display= 'block'
+
         }
     };
     const rzp1= new Razorpay(options);
@@ -105,4 +120,20 @@ document.getElementById('idk5').onclick= async function(e){
         console.log(response)
         alert('Something went wrong')
     });
+}
+
+document.getElementById('idk7').onclick= async function(e){
+    const leaderboard= await axios.get('http://localhost:5000/premium/get-leaderboard')
+    leaderboard.data.forEach(user => {
+        var newList=document.createElement('li');
+        newList.className="list-group-item"
+        var text='name- '+user.name+ ' total expense- '+ user.amount;
+        newList.appendChild(document.createTextNode(text));    
+        leaderboardlist.appendChild(newList);
+        
+    });
+    document.getElementById('idk8').style.display= 'block'
+
+
+
 }

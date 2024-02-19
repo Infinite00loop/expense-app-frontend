@@ -13,7 +13,11 @@ function onsignup(){
             .then((result)=> {
                 if(result.data==""){
                     axios.post('http://localhost:5000/insert-user',myObj)
-                    .then((res)=> console.log(res))
+                    .then((res)=> {
+                        console.log(res)
+                        window.location.href="../login/login.html"
+
+                    })
                     .catch((err)=> console.log(err));
                 }
                 else{
