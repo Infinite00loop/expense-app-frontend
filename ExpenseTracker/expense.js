@@ -81,7 +81,7 @@ function removeElement(e){
 }
 document.getElementById('idk5').onclick= async function(e){
     const token= localStorage.getItem('token')
-    const response=axios.get('http://localhost:5000/premiummembership',{headers:  {"authorization": token}})
+    const response= await axios.get('http://localhost:5000/premiummembership',{headers:  {"authorization": token}})
     console.log(response);
     var options=
     {
@@ -94,6 +94,7 @@ document.getElementById('idk5').onclick= async function(e){
             },{ headers: {"authorization": token}})
 
             alert('You unlocked the premium features')
+            document.getElementById('idk5').style.display= 'none'
         }
     };
     const rzp1= new Razorpay(options);
