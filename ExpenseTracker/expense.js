@@ -61,11 +61,7 @@ function showData(myObj){
     delButton.appendChild(document.createTextNode('Delete'));
     newList.appendChild(delButton);
     newList.setAttribute('item-id',myObj.id);
-    // var EditButton=document.createElement('button');
-    // EditButton.className='btn btn-primary edit btn-sm';
-    // EditButton.appendChild(document.createTextNode('Edit'));
-    // newList.appendChild(EditButton);
-
+    newList.setAttribute('item-amount',myObj.amount);
     list.appendChild(newList);
 }
 
@@ -75,7 +71,8 @@ function removeElement(e){
         if(confirm('Are you sure to delete ?')){
             var li=e.target.parentElement;
            const id=li.getAttribute('item-id')
-           axios .delete(`http://localhost:5000/delete-expense/${id}`,{ headers: {"authorization": token}})
+           const amount=li.getAttribute('item-amount')
+           axios .delete(`http://localhost:5000/delete-expense/${id}`,{params: {amount : amount}, headers: {"authorization": token}})
             .then(res=>console.log(res))
             .catch(err=>console.log(err))
             list.removeChild(li);
