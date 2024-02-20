@@ -40,15 +40,11 @@
             <div class="col-md-2"></div>
             <div class="col-md-8">
                 <form id= "form" action="#"  >
-                    <h1 >Log in</h1>
-                    <input type="email"  name="email" id="idx1" placeholder="Email" required style="width: 95%;  margin-left: 1%;  border-radius: 4px;"/><br><br>
+                    <h1 >Reset Password</h1>
+                    <input type="email"  name="email" id="idr1" placeholder="Email" required style="width: 95%;  margin-left: 1%;  border-radius: 4px;"/><br><br>
                     
-                    <input type="password" name="password" id="idx2" placeholder="Password" required style="width: 95%;  margin-left: 1%;  border-radius: 4px;"/><br><br>
-                    <input class="btn btn-primary font-weight-bold buttonStyle" onclick="onlogin()" type="button" value="Login" style=" margin-left:1%; width: 97%; ">
-                    <button id="idx3">Forgot Password</button>
-                    <br><br>
-                    <p>New user? <a href="../signup/signup.html">Sign Up</a></p>
-
+                    <!-- <input type="password" name="password" id="idx2" placeholder="Password" required style="width: 95%;  margin-left: 1%;  border-radius: 4px;"/><br><br> -->
+                    <input class="btn btn-primary font-weight-bold buttonStyle" onclick="onreset()" type="button" value="Reset Password" style=" margin-left:1%; width: 97%; ">
 
                 </form>
             </div>
@@ -58,6 +54,6 @@
     </div>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.19.0/axios.min.js"></script>
-    <script src="login.js"></script>
+    <script src="reset.js"></script>
 </body>
 </html>

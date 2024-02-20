@@ -18,3 +18,8 @@ function onlogin(){
         }
        
 }
+
+document.getElementById('idx3').onclick= function(e){
+     window.location.href="../reset/reset.html"
+
+}
