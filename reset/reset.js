@@ -10,7 +10,7 @@ function onReset(){
                 // localStorage.setItem('token', res.data.token)
                 // window.location.href="../ExpenseTracker/expense.html"
             })
-            .catch((err)=> alert(err.response.data.message));
+            .catch((err)=> alert(err));
            
         }
        
@@ -22,7 +22,7 @@ async function onSet(){
     let uuid=currentUrl.split('=')[1];
     console.log('User ID:', uuid);
     var password_=document.getElementById('idp1').value;
-    await axios.post('http://localhost:5000/password/forgotpassword', {uuid: uuid, password:password_})
+    await axios.post('http://localhost:5000/password/newpassword', {uuid: uuid, password:password_})
     }
     catch(err){
         alert('Something went wrong')
