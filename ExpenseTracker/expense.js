@@ -1,12 +1,26 @@
 var list=document.getElementById('list-items');
+var incomelist=document.getElementById('list-income-items');
 var leaderboardlist=document.getElementById('list-items2');
-
 list.addEventListener('click' ,removeElement);
-
+incomelist.addEventListener('click' ,removeElement);
 const token = localStorage.getItem('token')
 function getExpense(){
     list.innerHTML=''
     axios.get('http://localhost:5000/get-expense', { headers: {"authorization": token}})
+    .then(
+        (response)=>{
+            for(var i=0;i<response.data.length;i++){
+                showData(response.data[i]);
+            }
+        }
+    )
+    .catch(
+        (err)=>console.log(err)
+    )
+}
+function getSalary(){
+    incomelist.innerHTML = "";
+    axios.get('http://localhost:5000/get-income',{headers:{"authorization": token}})
     .then(
         (response)=>{
             for(var i=0;i<response.data.length;i++){
@@ -29,7 +43,9 @@ window.addEventListener('DOMContentLoaded',()=>{
         }
     })
     .catch((err)=>console.log(err));
-    getExpense()
+    getExpense();
+    getSalary();
+
 })
 
 function tracker(){
@@ -44,9 +60,19 @@ function tracker(){
         category: categ_
     };
 
-    axios.post('http://localhost:5000/insert-expense',myObj, { headers: {"authorization": token}})
-    .then((res)=>getExpense())
-    .catch((err)=>console.log(err));
+    if(categ_=="salary"){
+        axios.post('http://localhost:5000/insert-income',myObj,{headers:{"authorization": token}})
+        .then((res)=>{
+            console.log("about to print salary")
+            getSalary();
+        })
+        .catch((err)=>console.log(err));
+    }
+    else{
+        axios.post('http://localhost:5000/insert-expense',myObj,{headers:{"authorization": token}})
+        .then((res)=>getExpense())
+        .catch((err)=>console.log(err));
+    }
     
 } 
 
@@ -62,8 +88,13 @@ function showData(myObj){
     newList.appendChild(delButton);
     newList.setAttribute('item-id',myObj.id);
     newList.setAttribute('item-amount',myObj.amount);
-    list.appendChild(newList);
-}
+    newList.setAttribute('item-category',myObj.category);
+    if(myObj.category=="salary"){
+        incomelist.appendChild(newList);
+    }
+    else{
+        list.appendChild(newList);
+    }}
 
 
 function removeElement(e){
@@ -72,22 +103,23 @@ function removeElement(e){
             var li=e.target.parentElement;
            const id=li.getAttribute('item-id')
            const amount=li.getAttribute('item-amount')
-           axios .delete(`http://localhost:5000/delete-expense/${id}`,{params: {amount : amount}, headers: {"authorization": token}})
+           const categ=li.getAttribute('item-category')
+
+           if(categ=="salary"){
+            axios.delete(`http://localhost:5000/delete-income/${id}`,{params: {amount : amount},headers:{"authorization": token}})
+            .then(res=>console.log(res))
+            .catch(err=>console.log(err))
+            incomelist.removeChild(li);
+        }
+        else{
+            axios.delete(`http://localhost:5000/delete-expense/${id}`,{params: {amount : amount},headers:{"authorization": token}})
             .then(res=>console.log(res))
             .catch(err=>console.log(err))
             list.removeChild(li);
         }
+        }
     }
-    // else if(e.target.classList.contains('edit')){
-    //     var li=e.target.parentElement;
-    //     const arr=li.textContent.split(" - " );
-    //     var description=arr[1];
-    //     localStorage.removeItem(description);
-    //     document.getElementById('id1').value=arr[0];
-    //     document.getElementById('id2').value=arr[1];
-    //     document.getElementById('id3').value=arr[2];
-    //     list.removeChild(li);
-    // }
+   
 }
 document.getElementById('idk5').onclick= async function(e){
     const token= localStorage.getItem('token')

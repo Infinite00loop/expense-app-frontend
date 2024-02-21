@@ -11,7 +11,7 @@
     <div class="container">
         <div class="card card-body">
             <form class="form-inline mb-3">
-                <label>Choose expense amount</label>
+                <label>Choose amount</label>             
                 <input type="number" id="idk1" class="form-control mr-2">
                 <label>Choose description</label>
                 <input type="text" id="idk2" class="form-control mr-2">
@@ -21,6 +21,10 @@
                     <option value="food">food</option>
                     <option value="electricity">electricity</option>
                     <option value="movies">movies</option>
+                    <option value="education">education</option>
+                    <option value="transport">transport</option>
+                    <option value="health">health</option>
+                    <option value="salary">salary</option>
                 <input onclick="tracker()" type="button" value="Add Expense" id="idk4" class="btn btn-dark">
             </form>
             <button id="idk5">Buy Premium</button>
@@ -31,8 +35,18 @@
                
             </div>
             <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
-            <h1>Expenses</h1>
-            <ul id="list-items" class="list-group"></ul>
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-6">
+                        <h2>Expenses</h2>
+                        <ul id="list-items"></ul>
+                    </div>
+                    <div class="col-md-6">
+                        <h2>Income</h2>
+                        <ul id="list-income-items"></ul>
+                    </div>
+                </div>
+            </div>
             <div id="idk8" style="display:none">
                 <h1>LeaderBoard</h1>
                 <ul id="list-items2" class="list-group"></ul>
