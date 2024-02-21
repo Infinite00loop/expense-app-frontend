@@ -3,52 +3,57 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reset Password</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">    
-    <title>Document</title>
     <style>
-        form{
-            border: groove #020292;
-            
+        /* Custom styles can be added here */
+        body {
+            background-color: #f8f9fa; /* Set a light background color */
+            padding-top: 50px; /* Add some space from the top */
         }
-        h1{
-            text-align:center ;
-            color: #0f04ac;
+        
+        .form-container {
+            background-color: #ffffff; /* White background */
+            border-radius: 8px; /* Rounded corners */
+            padding: 20px; /* Add padding */
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Add a subtle shadow */
         }
-        label{
+
+        h1 {
+            text-align: center;
+            color: #0f04ac; /* Set title color */
+        }
+
+        label {
             margin-left: 1%;
         }
-        .image-container {
-             width: 300px;
-             height: 300px;
-             overflow: hidden;
-        }
+
         .buttonStyle {
-             transition-duration: 0.4s;
+            transition-duration: 0.4s;
         }
 
         .buttonStyle:hover {
-            background-color: #020292 ; 
+            background-color: #020292; 
             color: #87c5e9;
-    }        
-        
+        }
     </style>
 </head>
 
 <body>
-    <div>
-        <div class="row" style="margin-top: 10%;">
-            <div class="col-md-2"></div>
-            <div class="col-md-8">
-                <form id= "form" action="#"  >
-                    <h1 >Reset Password</h1>
-                    <input type="email"  name="email" id="idr1" placeholder="Email" required style="width: 95%;  margin-left: 1%;  border-radius: 4px;"/><br><br>
-                    <input class="btn btn-primary font-weight-bold buttonStyle" onclick="onReset()" type="button" value="Reset Password" style=" margin-left:1%; width: 97%; ">
-
-                </form>
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-md-6">
+                <div class="form-container">
+                    <form id="form" action="#">
+                        <h1>Reset Password</h1>
+                        <div class="form-group">
+                            <input type="email" name="email" id="idr1" class="form-control" placeholder="Email" required>
+                        </div>
+                        <button class="btn btn-primary font-weight-bold buttonStyle btn-block" onclick="onReset()">Reset Password</button>
+                    </form>
+                </div>
             </div>
         </div>
-        <br><br>
-        
     </div>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.19.0/axios.min.js"></script>

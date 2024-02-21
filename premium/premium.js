@@ -1,9 +1,20 @@
 
 const monthly=document.getElementById('monthly');
 const yearly=document.getElementById('yearly');
+const queryString=window.location.search;
+const urlParams=new URLSearchParams(queryString);
+const year=urlParams.get('year');
+const month=urlParams.get('month');
+const token = localStorage.getItem('token')
+
+
+const Obj={
+    year: year,
+    month: month
+}
 
 async function getMonthlyReport(){
-    const report=await axios.get('http://localhost:5000/premium/monthlyreport');
+    const report=await axios.get('http://localhost:5000/premium/monthlyreport',{params: Obj, headers: {"authorization": token}} );
     let totalIncome=0
     let totalExpense=0
     report.forEach(data => {
@@ -44,7 +55,7 @@ async function getMonthlyReport(){
 
 
 async function getYearlyReport(){
-    const report=await axios.get('http://localhost:5000/premium/yearlyreport');
+    const report=await axios.get('http://localhost:5000/premium/yearlyreport', {params: Obj, headers: {"authorization": token}});
     let totalIncome=0
     let totalExpense=0
     let totalSavings=0

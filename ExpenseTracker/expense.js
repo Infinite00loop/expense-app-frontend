@@ -166,3 +166,12 @@ document.getElementById('idk7').onclick= async function(e){
 
 
 }
+async function report(){
+    const input= document.getElementById('idk8').value;
+    const year= input.substring(0,4)
+    const month= input.substring(5,7)
+    // console.log(year + month);
+    const url= `../premium/premium.html?year=${year}&month=${month}`;
+    window.location.href=url;
+
+}

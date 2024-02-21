@@ -1,62 +1,126 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css" integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M" crossorigin="anonymous">
     <title>Item Lister</title>
-    <title>Document</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+    <style>
+        body {
+            background-color: #f8f9fa;
+        }
+        .card {
+            border-radius: 15px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        .card-body {
+            padding: 40px;
+        }
+        .form-control {
+            border-radius: 10px;
+            border-color: #ced4da; 
+        }
+        .form-control:focus {
+            border-color: #80bdff;
+            box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25); 
+        }
+        .btn-primary {
+            background-color: #007bff;
+            border-color: #007bff;
+            border-radius: 10px;
+            padding: 10px 20px;
+            font-weight: bold;
+            transition: background-color 0.3s ease;
+        }
+        .btn-primary:hover {
+            background-color: #0056b3;
+        }
+        .btn-dark {
+            background-color: #343a40;
+            border-color: #343a40;
+            border-radius: 10px;
+            padding: 10px 20px;
+            font-weight: bold;
+            transition: background-color 0.3s ease;
+        }
+        .btn-dark:hover {
+            background-color: #1d2124;
+        }
+        .btn-info {
+            background-color: #17a2b8;
+            border-color: #17a2b8;
+            border-radius: 10px;
+            padding: 10px 20px;
+            font-weight: bold;
+            transition: background-color 0.3s ease;
+        }
+        .btn-info:hover {
+            background-color: #117a8b;
+        }
+        .list-group-item {
+            border-radius: 10px;
+            margin-bottom: 10px;
+        }
+    </style>
 </head>
 <body>
-    <div class="container">
-        <div class="card card-body">
-            <form class="form-inline mb-3">
-                <label>Choose amount</label>             
-                <input type="number" id="idk1" class="form-control mr-2">
-                <label>Choose description</label>
-                <input type="text" id="idk2" class="form-control mr-2">
-                <label >Choose a category</label>
-                <select name="category" id="idk3" class="form-control mr-2">
-                    <option value="fuel">fuel</option>
-                    <option value="food">food</option>
-                    <option value="electricity">electricity</option>
-                    <option value="movies">movies</option>
-                    <option value="education">education</option>
-                    <option value="transport">transport</option>
-                    <option value="health">health</option>
-                    <option value="salary">salary</option>
-                <input onclick="tracker()" type="button" value="Add Expense" id="idk4" class="btn btn-dark">
-            </form>
-            <button id="idk5">Buy Premium</button>
-            <div id="idk6" style="display:none">
-                <p>You are a premium user now
-                    <button id="idk7">Show LeaderBoard</button>
-                </p>
-               
-            </div>
-            <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
-            <div class="container">
+    <div class="container mt-5">
+        <div class="card">
+            <div class="card-body">
+                <form class="form-inline mb-3">
+                    <div class="form-group mr-3">
+                        <label for="idk1" class="mr-2">Choose amount:</label>             
+                        <input type="number" id="idk1" class="form-control ml-2">
+                    </div>
+                    <div class="form-group mr-3">
+                        <label for="idk2" class="mr-2">Choose description:</label>
+                        <input type="text" id="idk2" class="form-control ml-2">
+                    </div>
+                    <div class="form-group mr-3">
+                        <label for="idk3" class="mr-2">Choose a category:</label>
+                        <select name="category" id="idk3" class="form-control ml-2">
+                            <option value="fuel">Fuel</option>
+                            <option value="food">Food</option>
+                            <option value="electricity">Electricity</option>
+                            <option value="movies">Movies</option>
+                            <option value="education">Education</option>
+                            <option value="transport">Transport</option>
+                            <option value="health">Health</option>
+                            <option value="salary">Salary</option>
+                        </select>
+                    </div>
+                    <button onclick="tracker()" type="button" class="btn btn-dark">Add Expense</button>
+                </form>
+                <button id="idk5" class="btn btn-primary mr-3">Buy Premium</button>
+                <div id="idk6" class="mt-3" style="display:none;">
+                    <p>You are now a premium user</p>
+                    <button id="idk7" class="btn btn-info">Show Leaderboard</button>
+                    <input type="month" id="idk8">
+                    <button onclick="report()" id="idk9" class="btn btn-info">Show Report</button>
+
+                </div>
+                <hr>
                 <div class="row">
                     <div class="col-md-6">
                         <h2>Expenses</h2>
-                        <ul id="list-items"></ul>
+                        <ul id="list-items" class="list-group"></ul>
                     </div>
                     <div class="col-md-6">
                         <h2>Income</h2>
-                        <ul id="list-income-items"></ul>
+                        <ul id="list-income-items" class="list-group"></ul>
                     </div>
                 </div>
-            </div>
-            <div id="idk8" style="display:none">
-                <h1>LeaderBoard</h1>
-                <ul id="list-items2" class="list-group"></ul>
-
+                <div id="idk8" class="mt-3" style="display:none;">
+                    <h1>Leaderboard</h1>
+                    <ul id="list-items2" class="list-group"></ul>
+                </div>
             </div>
         </div>
     </div>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.19.0/axios.min.js"></script>
-    
+    <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
     <script src="expense.js"></script>
 </body>
 </html>

@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">  
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">  
+    <title>Day to Day Expense</title>
+    <style>
+        .text-center {
+            text-align: center;
+        }
+        
+        .download-button {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            width: 60px; 
+            height: 60px; 
+            border-radius: 50%; 
+            background-color: #021830; 
+            border: none;
+            outline: none;
+            cursor: pointer;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: white; 
+            font-size: 24px; 
+        }
+
+        .download-button:hover {
+            background-color: #0056b3;
+        }
+        
+        /* Override existing styles */
+        table {
+            margin: 0 auto; /* Center the table horizontally */
+            background-color: #204D84;
+            color: white;
+            border-collapse: collapse;
+            width: 100%;
+            max-width: 1000px; /* Limit table width */
+        }
+
+        th, td {
+            padding: 10px;
+            text-align: center;
+            border: 1px solid white;
+        }
+
+        th {
+            background-color: #204D84;
+        }
+
+        tr:nth-child(even) {
+            background-color: #205284;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h2 class="text-center mt-4">Day to Day Expense</h2>
+        <p class="text-center" id="date"></p>
+        <h2 class="text-center" id="year">abc</h2>
+        <h3 class="text-center" id="month">abc</h3>
+
+        <table id="monthly">
+            <thead>
+                <tr>
+                    <th>Date</th>
+                    <th>Description</th>
+                    <th>Category</th>
+                    <th>Income</th>
+                    <th>Expense</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- Table content will be inserted here dynamically -->
+            </tbody>
+        </table>
+        <br>
+
+        <h3 class="text-center">abc</h3>
+        <table id="yearly">
+            <thead>
+                <tr>
+                    <th>Month</th>
+                    <th>Income</th>
+                    <th>Expense</th>
+                    <th>Savings</th>    
+                </tr>
+            </thead>
+            <tbody>
+                <!-- Table content will be inserted here dynamically -->
+            </tbody>
+        </table>
+    </div>
+
+    <button id="download" class="download-button">
+        <i class="fas fa-arrow-down"></i>
+    </button>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.19.0/axios.min.js"></script>
+    <script src="reset.js"></script>
+</body>
+</html>
