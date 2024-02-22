@@ -16,7 +16,7 @@ function itemsPerPage(){
   }
 function getExpense(page){
     list.innerHTML=''
-    axios.get(`http://localhost:5000/get-expense/?page=${page}&itemsPerPage=${localStorage.getItem('itemsPerPage')}`)
+    axios.get(`http://localhost:5000/get-expense/?page=${page}&itemsPerPage=${localStorage.getItem('itemsPerPage')}`, { headers: {"authorization": token}})
     .then(
         (response)=>{
             for(var i=0;i<response.data.expenses.length;i++){
