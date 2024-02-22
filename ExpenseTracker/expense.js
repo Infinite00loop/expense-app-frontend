@@ -7,14 +7,23 @@ var leaderboardlist=document.getElementById('list-items2');
 list.addEventListener('click' ,removeElement);
 incomelist.addEventListener('click' ,removeElement);
 const token = localStorage.getItem('token')
+function itemsPerPage(){
+    console.log("hi")
+    const noOfItems=document.getElementById('idk11').value;
+    console.log(noOfItems)
+    localStorage.setItem('itemsPerPage',noOfItems)
+    getExpense(1)
+  }
 function getExpense(page){
     list.innerHTML=''
-    axios.get(`http://localhost:5000/get-expense/?page=${page}`, { headers: {"authorization": token}})
+    axios.get(`http://localhost:5000/get-expense/?page=${page}&itemsPerPage=${localStorage.getItem('itemsPerPage')}`)
     .then(
         (response)=>{
             for(var i=0;i<response.data.expenses.length;i++){
                 showData(response.data.expenses[i]);
             }
+            console.log(response.data)
+            showPagination(response.data)
         }
     )
     .catch(
@@ -30,8 +39,7 @@ function getDownload(){
             for(var i=0;i<response.data.length;i++){
                 showDownload(response.data[i]);
             }
-            console.log(response.data)
-            showPagination(response.data)
+            
         }
     )
     .catch(
@@ -63,6 +71,7 @@ window.addEventListener('DOMContentLoaded',()=>{
         }
     })
     .catch((err)=>console.log(err));
+    document.getElementById('idk11').value=localStorage.getItem('itemsPerPage')||2;
     getExpense(1);
     getSalary();
     getDownload();
