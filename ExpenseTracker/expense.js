@@ -1,5 +1,7 @@
 var list=document.getElementById('list-items');
 var incomelist=document.getElementById('list-income-items');
+var downloadlist=document.getElementById('list-downloads');
+
 var leaderboardlist=document.getElementById('list-items2');
 list.addEventListener('click' ,removeElement);
 incomelist.addEventListener('click' ,removeElement);
@@ -11,6 +13,21 @@ function getExpense(){
         (response)=>{
             for(var i=0;i<response.data.length;i++){
                 showData(response.data[i]);
+            }
+        }
+    )
+    .catch(
+        (err)=>console.log(err)
+    )
+}
+function getDownload(){
+    console.log("hi i am token")
+    console.log(token)
+    axios.get('http://localhost:5000/premium/getdownload',{headers:{"authorization": token}})
+    .then(
+        (response)=>{
+            for(var i=0;i<response.data.length;i++){
+                showDownload(response.data[i]);
             }
         }
     )
@@ -45,6 +62,7 @@ window.addEventListener('DOMContentLoaded',()=>{
     .catch((err)=>console.log(err));
     getExpense();
     getSalary();
+    getDownload();
 
 })
 
@@ -161,7 +179,7 @@ document.getElementById('idk7').onclick= async function(e){
         leaderboardlist.appendChild(newList);
         
     });
-    document.getElementById('idk8').style.display= 'block'
+    document.getElementById('idk10').style.display= 'block'
 
 
 
@@ -174,4 +192,17 @@ async function report(){
     const url= `../premium/premium.html?year=${year}&month=${month}`;
     window.location.href=url;
 
+}
+
+function showDownload(myObj){
+    console.log(myObj)
+    var newList=document.createElement('li');
+    newList.className="list-group-item"
+    var a=document.createElement("a");
+    a.href=myObj.url;
+    a.appendChild(document.createTextNode(myObj.url));
+    var text=myObj.name+" : "
+    newList.appendChild(document.createTextNode(text));
+    newList.appendChild(a)
+    downloadlist.appendChild(newList);
 }
