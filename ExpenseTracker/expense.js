@@ -1,3 +1,4 @@
+var pagination=document.getElementById('paginate-expense');
 var list=document.getElementById('list-items');
 var incomelist=document.getElementById('list-income-items');
 var downloadlist=document.getElementById('list-downloads');
@@ -6,13 +7,13 @@ var leaderboardlist=document.getElementById('list-items2');
 list.addEventListener('click' ,removeElement);
 incomelist.addEventListener('click' ,removeElement);
 const token = localStorage.getItem('token')
-function getExpense(){
+function getExpense(page){
     list.innerHTML=''
-    axios.get('http://localhost:5000/get-expense', { headers: {"authorization": token}})
+    axios.get(`http://localhost:5000/get-expense/?page=${page}`, { headers: {"authorization": token}})
     .then(
         (response)=>{
-            for(var i=0;i<response.data.length;i++){
-                showData(response.data[i]);
+            for(var i=0;i<response.data.expenses.length;i++){
+                showData(response.data.expenses[i]);
             }
         }
     )
@@ -29,6 +30,8 @@ function getDownload(){
             for(var i=0;i<response.data.length;i++){
                 showDownload(response.data[i]);
             }
+            console.log(response.data)
+            showPagination(response.data)
         }
     )
     .catch(
@@ -60,7 +63,7 @@ window.addEventListener('DOMContentLoaded',()=>{
         }
     })
     .catch((err)=>console.log(err));
-    getExpense();
+    getExpense(1);
     getSalary();
     getDownload();
 
@@ -93,6 +96,35 @@ function tracker(){
     }
     
 } 
+function showPagination({
+    currentPage,
+    hasNextPage,
+    nextPage,
+    hasPreviousPage,
+    previousPage,
+    lastPage,
+}){
+    pagination.innerHTML='';
+    if(hasPreviousPage){
+        const btn2=document.createElement('button')
+        btn2.innerHTML=previousPage;
+        btn2.addEventListener('click',()=>getExpense(previousPage))
+        pagination.appendChild(btn2)
+    }
+    const btn1=document.createElement('button')
+    btn1.innerHTML=`<h3>${currentPage}</h3>`
+    btn1.addEventListener('click',()=>getExpense(currentPage))
+    pagination.appendChild(btn1)
+    console.log(hasNextPage);
+    console.log(hasPreviousPage)
+    if(hasNextPage){
+        console.log("i am in")
+        const btn3=document.createElement('button')
+        btn3.innerHTML=nextPage;
+        btn3.addEventListener('click',()=>getExpense(nextPage))
+        pagination.appendChild(btn3)
+    }
+}
 
 function showData(myObj){
     console.log(myObj)
