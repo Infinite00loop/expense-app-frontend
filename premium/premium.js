@@ -19,7 +19,7 @@ document.getElementById('month-year').textContent=`${months[(+month)-1]} ${year}
 document.getElementById('date').textContent=`${new Date()}`
 
 async function getMonthlyReport(){
-    const report=await axios.get('http://localhost:5000/premium/monthlyreport',{params: Obj, headers: {"authorization": token}} );
+    const report=await axios.get(`${api_endpoint}premium/monthlyreport`,{params: Obj, headers: {"authorization": token}} );
     let totalIncome=0
     let totalExpense=0
     Obj1.monthlyReport= report.data
@@ -69,7 +69,7 @@ async function getMonthlyReport(){
 
 
 async function getYearlyReport(){
-    const report=await axios.get('http://localhost:5000/premium/yearlyreport', {params: Obj, headers: {"authorization": token}});
+    const report=await axios.get(`${api_endpoint}premium/yearlyreport`, {params: Obj, headers: {"authorization": token}});
     let totalIncome=0
     let totalExpense=0
     let totalSavings=0
@@ -126,7 +126,7 @@ window.addEventListener('DOMContentLoaded',()=>{
 
     //     .save();    
     try{
-        const response=await axios.get('http://localhost:5000/premium/download', {params: Obj1, headers: {"authorization": token}});
+        const response=await axios.get(`${api_endpoint}premium/download`, {params: Obj1, headers: {"authorization": token}});
         if(response.status === 200){
             var a= document.createElement("a");
             a.href= response.data.fileUrl;

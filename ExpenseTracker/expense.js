@@ -16,7 +16,7 @@ function itemsPerPage(){
   }
 function getExpense(page){
     list.innerHTML=''
-    axios.get(`http://localhost:5000/get-expense/?page=${page}&itemsPerPage=${localStorage.getItem('itemsPerPage')}`, { headers: {"authorization": token}})
+    axios.get(`${api_endpoint}get-expense/?page=${page}&itemsPerPage=${localStorage.getItem('itemsPerPage')}`, { headers: {"authorization": token}})
     .then(
         (response)=>{
             for(var i=0;i<response.data.expenses.length;i++){
@@ -33,7 +33,7 @@ function getExpense(page){
 function getDownload(){
     console.log("hi i am token")
     console.log(token)
-    axios.get('http://localhost:5000/premium/getdownload',{headers:{"authorization": token}})
+    axios.get(`${api_endpoint}premium/getdownload`,{headers:{"authorization": token}})
     .then(
         (response)=>{
             for(var i=0;i<response.data.length;i++){
@@ -48,7 +48,7 @@ function getDownload(){
 }
 function getSalary(){
     incomelist.innerHTML = "";
-    axios.get('http://localhost:5000/get-income',{headers:{"authorization": token}})
+    axios.get(`${api_endpoint}get-income`,{headers:{"authorization": token}})
     .then(
         (response)=>{
             for(var i=0;i<response.data.length;i++){
@@ -62,7 +62,7 @@ function getSalary(){
 }
 
 window.addEventListener('DOMContentLoaded',()=>{
-    axios.post('http://localhost:5000/ispremium',{}, { headers: {"authorization": token}})
+    axios.post(`${api_endpoint}ispremium`,{}, { headers: {"authorization": token}})
     .then((res)=>{
         if(res.data.isPremium===true){
             document.getElementById('idk5').style.display= 'none'
@@ -91,7 +91,7 @@ function tracker(){
     };
 
     if(categ_=="salary"){
-        axios.post('http://localhost:5000/insert-income',myObj,{headers:{"authorization": token}})
+        axios.post(`${api_endpoint}insert-income`,myObj,{headers:{"authorization": token}})
         .then((res)=>{
             console.log("about to print salary")
             getSalary();
@@ -99,7 +99,7 @@ function tracker(){
         .catch((err)=>console.log(err));
     }
     else{
-        axios.post('http://localhost:5000/insert-expense',myObj,{headers:{"authorization": token}})
+        axios.post(`${api_endpoint}insert-expense`,myObj,{headers:{"authorization": token}})
         .then((res)=>getExpense())
         .catch((err)=>console.log(err));
     }
@@ -165,13 +165,13 @@ function removeElement(e){
            const categ=li.getAttribute('item-category')
 
            if(categ=="salary"){
-            axios.delete(`http://localhost:5000/delete-income/${id}`,{params: {amount : amount},headers:{"authorization": token}})
+            axios.delete(`${api_endpoint}delete-income/${id}`,{params: {amount : amount},headers:{"authorization": token}})
             .then(res=>console.log(res))
             .catch(err=>console.log(err))
             incomelist.removeChild(li);
         }
         else{
-            axios.delete(`http://localhost:5000/delete-expense/${id}`,{params: {amount : amount},headers:{"authorization": token}})
+            axios.delete(`${api_endpoint}delete-expense/${id}`,{params: {amount : amount},headers:{"authorization": token}})
             .then(res=>console.log(res))
             .catch(err=>console.log(err))
             list.removeChild(li);
@@ -180,18 +180,17 @@ function removeElement(e){
     }
    
 }
-document.getElementById('idk5').onclick= async function(e){
-    const token= localStorage.getItem('token')
-    const response= await axios.get('http://localhost:5000/premiummembership',{headers:  {"authorization": token}})
+document.getElementById('idk5').onclick= async function(e){  //onclick function for buy premium button
+    const response= await axios.get(`${api_endpoint}premiummembership`,{headers:  {"authorization": token}})
     console.log(response);
     var options=
     {
         "key":response.data.key_id,
         "order_id":response.data.order.id,
-        "handler":async function (response){
-            await axios.post('http://localhost:5000/updatetransactionstatus',{
+        "handler":async function (res){
+            await axios.post(`${api_endpoint}updatetransactionstatus`,{
                 order_id: options.order_id,
-                payment_id: response.razorpay_payment_id,
+                payment_id: res.razorpay_payment_id,
             },{ headers: {"authorization": token}})
 
             alert('You unlocked the premium features')
@@ -211,7 +210,7 @@ document.getElementById('idk5').onclick= async function(e){
 }
 
 document.getElementById('idk7').onclick= async function(e){
-    const leaderboard= await axios.get('http://localhost:5000/premium/get-leaderboard')
+    const leaderboard= await axios.get(`${api_endpoint}premium/get-leaderboard`)
     leaderboard.data.forEach(user => {
         var newList=document.createElement('li');
         newList.className="list-group-item"

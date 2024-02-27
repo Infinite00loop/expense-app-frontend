@@ -7,19 +7,19 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
     <title>Document</title>
     <style>
-        form{
+        form {
             border: groove;
             border-radius: 20px;
             border-width: 10px;
         }
-        h1{
-            text-align:center ;
+        h1 {
+            text-align: center;
             color: #ffa500;
         }
-        label{
+        label {
             margin-left: 1%;
         }  
-        .text-center{
+        .text-center {
             display: flex;
             justify-content: center;
             align-content: center;
@@ -39,24 +39,27 @@
             color: white;
             font-size: 24px;
         }
-        table tr:first-child td{
+        table tr:first-child td {
             background-color: rgb(32, 97, 132);
             color: white;
         }
         table tr:nth-child(odd) {
-            background-color: #c4bfbf; /* Set the grey background color for odd rows */
+            background-color: #c4bfbf; 
+        }
+        .download-button {
+            margin-left: 90%;
         }
     </style>
 </head>
 
 <body>
-    <div>
+    <div class="container">
         <h2 class="text-center">Day to Day Expenses</h2>
-        <p id="date">test</p>
+        <p id="date" class="text-center">test</p>
         <h2 id="year" class="text-center">test</h2>
         <h3 id="month-year" class="text-center">test</h3>
         <br>
-        <table id="monthly" width="1000" border="4" cellspacing="0" align="center">
+        <table id="monthly" class="table table-bordered" width="1000" align="center">
             <tr>
                 <td align="center" height="50" width="200" ><b>Date</b></td>
                 <td align="center" height="50" width="200" ><b>Description</b></td>
@@ -68,7 +71,7 @@
         <br>
         <h3 class="text-center">Yearly Report</h3>
         <br>
-        <table id="yearly" width="1000" border="4" cellspacing="0" align="center">
+        <table id="yearly" class="table table-bordered" width="1000" align="center">
             <tr>
                 <td align="center" height="50" width="200" ><b>Month</b></td>
                 <td align="center" height="50" width="200" ><b>Income</b></td>
@@ -87,6 +90,7 @@
     </button>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.9.2/html2pdf.bundle.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.19.0/axios.min.js"></script>
+    <script src="../config.js"></script>
     <script src="premium.js"></script>
 </body>
 </html>

@@ -1,4 +1,5 @@
-function onlogin(){
+function onlogin(e){
+    e.preventDefault();
     var email_=document.getElementById('idx1').value;
     var password_=document.getElementById('idx2').value;
    
@@ -7,7 +8,7 @@ function onlogin(){
         password: password_
     };
         if(email_!='' && password_!='' ){
-            axios.post('http://localhost:5000/login-user',myObj)
+            axios.post(`${api_endpoint}login-user`,myObj)
             .then((res)=> {
                 alert(res.data.message)
                 localStorage.setItem('token', res.data.token)

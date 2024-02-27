@@ -4,25 +4,24 @@ function onReset(){
         email: email_
     };
         if(email_!='' ){
-            axios.post('http://localhost:5000/password/forgotpassword',myObj)
+            axios.post(`${api_endpoint}password/forgotpassword`,myObj)
             .then((res)=> {
                 alert('reset link send')
-                // localStorage.setItem('token', res.data.token)
-                // window.location.href="../ExpenseTracker/expense.html"
             })
             .catch((err)=> alert(err));
            
         }
        
 }
-async function onSet(){
+async function onSet(e){
+    e.preventDefault();
     try{
         const currentUrl = window.location.href;
     let paramString = currentUrl.split('?')[1];
     let uuid=currentUrl.split('=')[1];
     console.log('User ID:', uuid);
     var password_=document.getElementById('idp1').value;
-    await axios.post('http://localhost:5000/password/newpassword', {uuid: uuid, password:password_})
+    await axios.post(`${api_endpoint}password/newpassword`, {uuid: uuid, password:password_})
     }
     catch(err){
         alert('Something went wrong')
